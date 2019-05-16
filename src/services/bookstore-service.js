@@ -3,7 +3,7 @@ export default class BookstoreService {
         return [
             {
                 id: 1,
-                title: 'Пуаро',
+                title: 'Эркюль Пуаро',
                 author: 'Агата Кристи'
             },
             {
