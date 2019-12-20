@@ -1,7 +1,2 @@
-const booksLoaded = (newBooks) => {
-    return {
-        type: 'BOOKS_LOADED',
-        payload: newBooks
-    }
-};
-export {booksLoaded};
+export {fetchBooks} from './books';
+export {onAddedToCart} from './cart';
