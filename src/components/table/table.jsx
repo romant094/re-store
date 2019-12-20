@@ -5,14 +5,14 @@ import {onAddedToCart} from '../../actions';
 const Table = ({items, total, onIncrease, onDecrease, onDelete}) => {
 
     const renderRow = (item, index) => {
-        const {title, count, price} = item;
+        const {title, count, total} = item;
 
         return (
             <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{title}</td>
                 <td>{count}</td>
-                <td>{price * count}₽</td>
+                <td>{total}₽</td>
                 <td className='d-flex justify-content-end'>
                     <button
                         className="btn btn-outline-primary mr-3"

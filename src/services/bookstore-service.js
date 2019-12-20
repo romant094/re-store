@@ -13,6 +13,13 @@ export class BookstoreService {
             author: 'Джоан К. Роалинг',
             price: 490,
             image: 'https://www.knigosvet.com/img/w300/2316.jpg'
+        },
+        {
+            id: 3,
+            title: 'Гарри Поттер и орден феникса',
+            author: 'Джоан К. Роалинг',
+            price: 510,
+            image: 'https://mudry-filin.com.ua/wa-data/public/shop/products/92/80/8092/images/16472/16472.970.jpg'
         }
     ];
 
