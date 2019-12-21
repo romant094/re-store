@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {onAddedToCart} from '../../actions';
+import {cartActions} from '../../actions';
 
-const Table = ({items, total, onIncrease, onDecrease, onDelete}) => {
+const Table = ({items, total, onDeleteFromCart, onIncreaseItemCount, onDecreaseItemCount}) => {
 
     const renderRow = (item, index) => {
         const {title, count, total} = item;
@@ -16,19 +16,19 @@ const Table = ({items, total, onIncrease, onDecrease, onDelete}) => {
                 <td className='d-flex justify-content-end'>
                     <button
                         className="btn btn-outline-primary mr-3"
-                        onClick={() => onDecrease(index)}
+                        onClick={() => onDecreaseItemCount(index)}
                     >
                         -1
                     </button>
                     <button
                         className="btn btn-outline-primary mr-3"
-                        onClick={() => onIncrease(index)}
+                        onClick={() => onIncreaseItemCount(index)}
                     >
                         +1
                     </button>
                     <button
                         className="btn btn-outline-primary"
-                        onClick={() => onDelete(index)}
+                        onClick={() => onDeleteFromCart(index)}
                     >
                         Удалить
                     </button>
@@ -65,6 +65,6 @@ const Table = ({items, total, onIncrease, onDecrease, onDelete}) => {
 
 const mapStateToProps = ({cartItems, orderTotal}) => ({items: cartItems, total: orderTotal});
 
-const TableWrapped = connect(mapStateToProps, onAddedToCart)(Table);
+const TableWrapped = connect(mapStateToProps, cartActions)(Table);
 
 export {TableWrapped as Table};

@@ -5,22 +5,22 @@ const onAddedToCart = (id) => {
     type: CART.addItem,
     payload: id
 }};
-const onDeletedFromCart = (id) => ({
+const onDeleteFromCart = (id) => ({
     type: CART.deleteItem,
     payload: id
 });
-const increaseItemCount = (id) => ({
+const onIncreaseItemCount = (id) => ({
     type: CART.increaseCount,
     payload: id
 });
-const decreaseItemCount = (id) => ({
+const onDecreaseItemCount = (id) => ({
     type: CART.decreaseCount,
     payload: id
 });
 
 export {
     onAddedToCart,
-    onDeletedFromCart,
-    increaseItemCount,
-    decreaseItemCount
+    onDeleteFromCart,
+    onIncreaseItemCount,
+    onDecreaseItemCount
 };

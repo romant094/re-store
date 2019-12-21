@@ -7,7 +7,7 @@ import {compose} from '../../utils';
 import {fetchBooks} from '../../actions'
 import {Spinner} from '../spinner';
 import {ErrorIndicator} from '../error-indicator';
-import {onAddedToCart} from '../../actions';
+import {cartActions} from '../../actions';
 
 class BookListContainer extends Component {
     componentDidMount() {
@@ -30,10 +30,13 @@ class BookListContainer extends Component {
 }
 
 const mapStateToProps = ({books, loading, error}) => ({books, loading, error});
-const mapDispatchToProps = (dispatch, {bookstoreService}) => ({
-    fetchBooks: fetchBooks(dispatch, bookstoreService),
-    onAddedToCart: (id) => dispatch(onAddedToCart(id))
-});
+const mapDispatchToProps = (dispatch, {bookstoreService}) => {
+    const {onAddedToCart} = cartActions;
+    return {
+        fetchBooks: fetchBooks(dispatch, bookstoreService),
+        onAddedToCart: (id) => dispatch(onAddedToCart(id))
+    }
+};
 
 // const BookListWrapped = withBookstoreService()(connect(mapStateToProps, actions)(BookList));
 const BookListWrapped = compose(

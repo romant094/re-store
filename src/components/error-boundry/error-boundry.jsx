@@ -15,13 +15,13 @@ export class ErrorBoundry extends Component {
         const {children} = this.props;
 
         return (
-            <div>
+            <>
                 {
                     hasError
                         ? <ErrorIndicator />
                         : children
                 }
-            </div>
+            </>
         );
     }
 }

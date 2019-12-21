@@ -4,9 +4,9 @@ import {Table} from '../table/table';
 
 export const Home = () => {
     return (
-        <div>
+        <>
             <BookList />
             <Table />
-        </div>
+        </>
     );
 };
