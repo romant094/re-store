@@ -6,7 +6,6 @@ export const FETCH_BOOKS = {
 
 export const CART = {
     addItem: 'BOOK_ADDED_TO_CART',
-    increaseCount: 'CART_INCREASE_ITEM_COUNT',
-    decreaseCount: 'CART_DECREASE_ITEM_COUNT',
-    deleteItem: 'CART_DELETE_ITEM'
+    decreaseCount: 'BOOK_REMOVED_FROM_CART',
+    deleteItem: 'ALL_BOOKS_REMOVED_FROM_CART'
 };

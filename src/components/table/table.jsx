@@ -2,10 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {cartActions} from '../../actions';
 
-const Table = ({items, total, onDeleteFromCart, onIncreaseItemCount, onDecreaseItemCount}) => {
+const {onAddedToCart, onDecreaseItemCount, onDeleteFromCart} = cartActions;
+const Table = ({items, total, onDecrease, onIncrease, onDelete}) => {
 
     const renderRow = (item, index) => {
-        const {title, count, total} = item;
+        const {id, title, count, total} = item;
 
         return (
             <tr key={index}>
@@ -16,19 +17,19 @@ const Table = ({items, total, onDeleteFromCart, onIncreaseItemCount, onDecreaseI
                 <td className='d-flex justify-content-end'>
                     <button
                         className="btn btn-outline-primary mr-3"
-                        onClick={() => onDecreaseItemCount(index)}
+                        onClick={() => onDecrease(id)}
                     >
                         -1
                     </button>
                     <button
                         className="btn btn-outline-primary mr-3"
-                        onClick={() => onIncreaseItemCount(index)}
+                        onClick={() => onIncrease(id)}
                     >
                         +1
                     </button>
                     <button
                         className="btn btn-outline-primary"
-                        onClick={() => onDeleteFromCart(index)}
+                        onClick={() => onDelete(id)}
                     >
                         Удалить
                     </button>
@@ -64,7 +65,12 @@ const Table = ({items, total, onDeleteFromCart, onIncreaseItemCount, onDecreaseI
 };
 
 const mapStateToProps = ({cartItems, orderTotal}) => ({items: cartItems, total: orderTotal});
+const mapDispatchToProps = {
+    onDecrease: onDecreaseItemCount,
+    onIncrease: onAddedToCart,
+    onDelete: onDeleteFromCart
+};
 
-const TableWrapped = connect(mapStateToProps, cartActions)(Table);
+const TableWrapped = connect(mapStateToProps, mapDispatchToProps)(Table);
 
 export {TableWrapped as Table};

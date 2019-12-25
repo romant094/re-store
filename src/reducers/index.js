@@ -1,5 +1,5 @@
 import {CART, FETCH_BOOKS} from '../actions/constants';
-import {updateCartItem, countCartTotal, updateCart} from '../utils';
+import {updateCartItem, updateCart, updateOrder} from '../utils';
 
 const initialState = {
     books: [],
@@ -33,26 +33,15 @@ export const reducer = (state = initialState, action) => {
                 error: payload
             };
         case CART.addItem:
-            const {books, cartItems} = state;
-            const itemIndex = cartItems.findIndex(book => book.id === payload);
-            const book = books.find(book => book.id === payload);
+            return updateOrder(state, payload, 1);
 
-            const newItem = updateCartItem(book, cartItems[itemIndex]);
-            const newCart = updateCart(cartItems, newItem, itemIndex);
-
-            return {
-                ...state,
-                cartItems: newCart,
-                orderTotal: countCartTotal(newCart, 'total'),
-                orderTotalQty: countCartTotal(newCart, 'count')
-            };
+        case CART.decreaseCount:
+            return updateOrder(state, payload, -1);
 
         case CART.deleteItem:
+            const item = state.cartItems.find(book => book.id === payload)
+            return updateOrder(state, payload, -item.count);
 
-
-            return {
-                ...state
-            };
         default:
             return state;
     }

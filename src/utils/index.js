@@ -1,5 +1,5 @@
 export const compose = (...functions) => (component) => functions.reduceRight((wrapped, f) => f(wrapped), component);
-export const updateCartItem = (book, item = {}) => {
+export const updateCartItem = (book, item = {}, quantity) => {
     const {
         id = book.id,
         count = 0,
@@ -10,12 +10,19 @@ export const updateCartItem = (book, item = {}) => {
     return {
         id,
         title,
-        count: count + 1,
-        total: total + book.price
+        count: count + quantity,
+        total: total + quantity * book.price
     }
 };
 
 export const updateCart = (cartItems, item, idx) => {
+    if (item.count === 0){
+        return [
+            ...cartItems.slice(0, idx),
+            ...cartItems.slice(idx + 1)
+        ]
+    }
+
     if (idx === -1) {
         return [...cartItems, item]
     }
@@ -27,4 +34,16 @@ export const updateCart = (cartItems, item, idx) => {
     ]
 };
 
-export const countCartTotal = (array, key) => array.reduce((acc, item) => item[key] + acc, 0);
+export const updateOrder = (state, bookId, quantity) => {
+    const {books, cartItems} = state;
+
+    const itemIndex = cartItems.findIndex(({id}) => id === bookId);
+    const book = books.find(({id}) => id === bookId);
+
+    const newItem = updateCartItem(book, cartItems[itemIndex], quantity);
+
+    return {
+        ...state,
+        cartItems: updateCart(cartItems, newItem, itemIndex)
+    };
+}
